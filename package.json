@@ -1,0 +1,14 @@
+{
+  "name": "html-builder",
+  "version": "1.0.0",
+  "description": "html-builder task for RSSchool",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "evgeniimal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvgeniiMal/html-builder-black/issues"
+  },
+  "homepage": "https://github.com/EvgeniiMal/html-builder-black#readme"
+}
