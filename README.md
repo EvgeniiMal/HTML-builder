@@ -16,8 +16,8 @@
 - Каждое из заданий должно запускаться командой node <имя папки задания> выполненной в корневой директории
 
 ## Оглавление
-[01 Чтение файла с выводом содержимого в консоль](#чтение-файла-с-выводом-содержимого-в-консоль)  
-[02 Запись консольного ввода в файл](#запись-консольного-ввода-в-файл)  
-[03 Вывод информации о файлаx хранящихся в папке](#вывод-информации-о-файлаx-хранящихся-в-папке)  
-[04 Сборка css бандла](#сборка-css-бандла)  
-[05 Сборка HTML страницы](#сборка-HTML-страницы-из-компонентов)  
+[01 Чтение файла с выводом содержимого в консоль](https://github.com/EvgeniiMal/HTML-builder/blob/main/01-read-file/README.md)  
+[02 Запись консольного ввода в файл](https://github.com/EvgeniiMal/HTML-builder/blob/main/02-write-file/README.md)  
+[03 Вывод информации о файлаx хранящихся в папке](https://github.com/EvgeniiMal/HTML-builder/blob/main/03-files-in-folder/README.md)  
+[04 Сборка css бандла](https://github.com/EvgeniiMal/HTML-builder/blob/main/04-merge-styles/README.md)  
+[05 Сборка HTML страницы](https://github.com/EvgeniiMal/HTML-builder/blob/main/05-merge-html/README.md)  
