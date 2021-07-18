@@ -1,0 +1,34 @@
+.pluto {
+	height: 780px;
+	width: 780px;
+	margin-top: -450px;
+	margin-left: -320px;
+	animation: orb 7439.70741s linear infinite;
+}
+
+.pluto:before {
+	height: 3px;
+	width: 3px;
+	background: #fff;
+	margin-top: -1.5px;
+	margin-left: -1.5px;
+}
+
+.hide {
+	display: none;
+}
+
+.links {
+	margin-top: 5px !important;
+	font-size: 1em !important;
+}
+
+@keyframes orb {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(-360deg);
+	}
+}
