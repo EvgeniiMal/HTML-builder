@@ -49,7 +49,6 @@
 ##### Полезные ссылки
 *Обратите внимание, что переводы документации на русский язык могут быть устаревшими и не содержать всех современных возможностей модулей. Однако, основные концепции описанные там работают и по сей день. Для получения актуальной информации всегда используйте официальную документацию!*
 - События:  
-    - [События от Metanit](https://metanit.com/web/nodejs/2.9.php)
     - [Understanding Node.js Event-Driven Architecture (FreeCodeCamp)](https://www.freecodecamp.org/news/understanding-node-js-event-driven-architecture-223292fcbc2d/)
     - [Event emitter (nodejsdev.ru)](https://nodejsdev/learn/the-node.js-event-emitter)  
     - [Перевод документации Events (nodejsdev.ru)](https://nodejsdev.ru/api/events/)  
@@ -60,8 +59,6 @@
     - [fs.createReadStream](https://nodejs.org/api/fs.html#fs_fs_createreadstream_path_options)
     - [Потоки (nodejsdev.ru)](https://nodejsdev.ru/api/stream/)
     - [Pipe (nodejsdev.ru)](https://nodejsdev.ru/guide/pipe/)
-    - [Stream от Metanit](https://metanit.com/web/nodejs/2.10.php)  
-    - [Pipe от Metanit](https://metanit.com/web/nodejs/2.11.php)   
 - Модуль Path:
     - [Path](https://nodejs.org/api/path.html)   
     - [Path перевод на русский](https://nodejs.org/api/path.html#path_path)
