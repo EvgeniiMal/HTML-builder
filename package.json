@@ -10,5 +10,8 @@
   "bugs": {
     "url": "https://github.com/EvgeniiMal/html-builder-black/issues"
   },
-  "homepage": "https://github.com/EvgeniiMal/html-builder-black#readme"
+  "homepage": "https://github.com/EvgeniiMal/html-builder-black#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
 }
