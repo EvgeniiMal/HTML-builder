@@ -1,0 +1,46 @@
+.shap.two {
+  background-image: -moz-linear-gradient(140deg, #009688 0%, #009688 100%);
+  background-image: -webkit-linear-gradient(140deg, #009688 0%, #009688 100%);
+  background-image: -ms-linear-gradient(140deg, #009688 0%, #009688 100%);
+  width: 666px;
+  height: 330px;
+  top: -42%;
+  left: -15%;
+}
+.mauto{margin:auto;}
+.bg-svg{
+  
+  background-image: url(bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  position: relative;
+  
+margin-bottom:40px;
+}
+
+body{
+ background-color: #fafafa;
+}
+
+#Leaf1
+{
+  -webkit-animation: shake-bottom 2s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+        animation: shake-bottom 2s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+          transform-box: fill-box;
+          }
+
+
+#leaf11
+{
+  -webkit-animation: shake-bottom 2.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+        animation: shake-bottom 2.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+          transform-box: fill-box; 
+}
+
+#leaf10
+{
+  -webkit-animation: shake-bottom 3s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+        animation: shake-bottom 3s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+          transform-box: fill-box; 
+}

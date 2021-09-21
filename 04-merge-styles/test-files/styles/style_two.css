@@ -1,0 +1,33 @@
+#Vector_39{
+  animation: swing ease-in-out 1s infinite alternate;
+  transform-origin: center 0px;
+  transform-box: fill-box;
+  float:left;
+}
+
+#Vector_40
+{
+  animation: swing ease-in-out 1s infinite alternate;
+  transform-origin: center -20px;
+  transform-box: fill-box;
+  float:left;
+}
+
+
+.shap.one {
+  background-image: -moz-linear-gradient(140deg, #009688 0%, #009688 100%);
+  background-image: -webkit-linear-gradient(140deg, #009688 0%, #009688 100%);
+  background-image: -ms-linear-gradient(140deg, #009688 0%, #009688 100%);
+  width: 650px;
+  height: 510px;
+  top: -43%;
+  left: -58%;
+}
+.shap {
+  position: absolute;
+  opacity: 0.05;
+  transform: rotate(45deg);
+  left: 90px;
+  z-index: -1;
+  border-radius: 45px;
+}
