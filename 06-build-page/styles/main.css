@@ -1,11 +1,6 @@
-main {
-  background-color: #ccc;
-}
-
 main .container {
-  background-color: #ccc;
   padding-top: 120px;
-  padding-bottom: 240px;
+  padding-bottom: 120px;
 }
 
 .main-title {
