@@ -23,4 +23,4 @@
 [03 Вывод информации о файлаx хранящихся в папке](https://github.com/EvgeniiMal/HTML-builder/blob/main/03-files-in-folder/README.md)  
 [04 Копирование папки](https://github.com/EvgeniiMal/HTML-builder/blob/main/04-copy-folder/README.md)  
 [05 Сборка css бандла](https://github.com/EvgeniiMal/HTML-builder/blob/main/05-merge-styles/README.md)  
-[06 Сборка HTML страницы из компонентов и стилей](https://github.com/EvgeniiMal/HTML-builder/tree/main/05-build-page)  
+[06 Сборка HTML страницы из компонентов и стилей](https://github.com/EvgeniiMal/HTML-builder/tree/main/06-build-page)  
