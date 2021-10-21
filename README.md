@@ -16,7 +16,7 @@
 - Каждое из заданий должно запускаться командой node <имя папки задания> выполненной в корневой директории
 - Запрещается использование синхронных функций модуля fs такие как ```fs.statSync(path[, options])```, 
 ```fs.readFileSync(path[, options])``` и другие находящиеся в разделе [synchronous API](https://nodejs.org/api/fs.html#fs_synchronous_api)
-- Выполнение и проверка таска должны проводиться на node 14-й LTS версии . 
+- Выполнение и проверка таска должны проводиться на node LTS версии . 
 
 ## Оглавление
 [01 Чтение файла с выводом содержимого в консоль](https://github.com/EvgeniiMal/HTML-builder/blob/main/01-read-file/README.md)  
