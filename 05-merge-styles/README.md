@@ -26,4 +26,4 @@
 5. Запись прочитанных данных в массив
 6. Запись массива стилей в файл **bundle.css**
 
-Для наглядного эффекта работы вашего скрипта рекомендую установить в vscode расширение [Life Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) и запустить с его помощью файл **index.html** находящийся в директории **project-dist**.
+Для наглядного эффекта работы вашего скрипта рекомендую установить в vscode расширение [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) и запустить с его помощью файл **index.html** находящийся в директории **project-dist**.
