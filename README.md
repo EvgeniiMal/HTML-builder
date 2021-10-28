@@ -20,7 +20,7 @@
 
 ## Crosscheck
  
-Ход выполнения проверки орисан в вики репозитория. Посте старта cross-check перейдите по [данной ссылке](https://github.com/EvgeniiMal/HTML-builder/wiki/HTML-builder-crosscheck) и следуйте инструкции на главной странице. 
+Ход выполнения проверки описан в вики репозитория. Посте старта cross-check перейдите по [данной ссылке](https://github.com/EvgeniiMal/HTML-builder/wiki/HTML-builder-crosscheck) и следуйте инструкции на главной странице. 
 
 ## Общие правила!!!:
 
