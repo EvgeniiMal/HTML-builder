@@ -65,4 +65,4 @@
     - [Pipe от Metanit](https://metanit.com/web/nodejs/2.11.php)  
 - Модуль Path:
     - [Path](https://nodejs.org/api/path.html)   
-    - [Path перевод на русский](https://nodejs.org/api/path.html#path_path)
+    - [Path перевод на русский](https://nodejsdev.ru/api/path/)
