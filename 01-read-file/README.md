@@ -50,7 +50,7 @@
 *Обратите внимание, что переводы документации на русский язык могут быть устаревшими и не содержать всех современных возможностей модулей. Однако, основные концепции описанные там работают и по сей день. Для получения актуальной информации всегда используйте официальную документацию!*
 - События:  
     - [Understanding Node.js Event-Driven Architecture (FreeCodeCamp)](https://www.freecodecamp.org/news/understanding-node-js-event-driven-architecture-223292fcbc2d/)
-    - [Event emitter (nodejsdev.ru)](https://nodejsdev/learn/the-node.js-event-emitter)  
+    - [Event emitter (nodejsdev.ru)]https://nodejsdev.ru/doc/event-emitter/)  
     - [Перевод документации Events (nodejsdev.ru)](https://nodejsdev.ru/api/events/)  
     - [События гайд (nodejsdev.ru)](https://nodejsdev.ru/guide/events/) 
 - Потоки:
