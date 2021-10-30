@@ -61,7 +61,7 @@
     - [Pipe (nodejsdev.ru)](https://nodejsdev.ru/guide/pipe/)
 - Модуль Path:
     - [Path](https://nodejs.org/api/path.html)   
-    - [Path перевод на русский](https://nodejs.org/api/path.html#path_path)
+    - [Path перевод на русский](https://nodejsdev.ru/api/path/)
 - Process: 
     - [Process](https://nodejs.org/api/process.html)
     - [Process перевод на русский](https://nodejsdev.ru/api/process/)
