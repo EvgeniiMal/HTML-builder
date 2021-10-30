@@ -52,7 +52,7 @@
 - События:  
     - [События от Metanit](https://metanit.com/web/nodejs/2.9.php)
     - [Understanding Node.js Event-Driven Architecture (FreeCodeCamp)](https://www.freecodecamp.org/news/understanding-node-js-event-driven-architecture-223292fcbc2d/)
-    - [Event emitter (nodejsdev.ru)](https://nodejsdev.ru/learn/the-node.js-event-emitter)  
+    - [Event emitter](https://nodejs.dev/learn/the-nodejs-event-emitter)  
     - [Перевод документации Events (nodejsdev.ru)](https://nodejsdev.ru/api/events/)  
     - [События гайд (nodejsdev.ru)](https://nodejsdev.ru/guide/events/) 
 - Потоки:
