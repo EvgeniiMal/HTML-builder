@@ -14,5 +14,10 @@
   "devDependencies": {
     "@types/node": "^16.11.4",
     "eslint": "^7.32.0"
+  },
+  "dependencies": {
+    "file-bytes": "^2.0.3",
+    "glob": "^7.2.0",
+    "walk": "^2.3.15"
   }
 }
