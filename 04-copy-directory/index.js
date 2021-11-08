@@ -20,7 +20,7 @@ fs.readdir(way, (err, data) => {
       fs.createWriteStream(__dirname+'\\files-copy\\'+file);
       fs.copyFile('04-copy-directory\\files\\'+file, __dirname+'\\files-copy\\'+file, (err) => {
         if (err) throw err;
-        console.log('source.txt was copied to destination.txt');
+        console.log('was copied to destination');
     });
     });
   });
