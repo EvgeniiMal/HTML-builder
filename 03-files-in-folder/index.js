@@ -11,6 +11,5 @@ fs.readdir(folder ,  (err, data) => {
                 console.log(path.basename(file, path.extname(file)) + ' - ' + path.extname(file).slice(1) + ' - ' + (fs.statSync(path.join(folder, file)).size)/1000 + 'kb');
             }
         })
-         
-    });
+    })
 })
