@@ -8,81 +8,48 @@ let sourcePath = path.join(__dirname, "template.html")
 let readStreamTemp = fs.createReadStream(sourcePath, "utf8");
 let sourcePathComp = path.join(__dirname, "components");
 
-
-
 function createStyles() {
-
     let cssFolder=path.join(__dirname , 'styles')
     let resFile=path.join(__dirname , 'project-dist', 'style.css')
-    
-    
     fs.unlink (resFile,  err => {})
     fs.writeFile (resFile, '\n', err => {})
-    
-    
     fs.readdir(cssFolder ,  (err, files) => {
-    
         files.forEach( file => {
             let pathFile=path.join(cssFolder , file)
             fs.stat(pathFile, (err, stats) => {
-                if (!stats.isDirectory() && (path.extname(file).slice(1) === 'css') ) {
-              fs.createReadStream(pathFile, 'utf8').on('data', (arr) =>{
-                
-                
-                
-                fs.appendFile (resFile, arr +  '\n', err => {
-                    
-                    })
-                
-                
-              })
-            
+                if (!stats.isDirectory() && (path.extname(file).slice(1) === 'css') ) 
+				{
+					fs.createReadStream(pathFile, 'utf8').on('data', (arr) =>{
+						fs.appendFile (resFile, arr +  '\n', err => {})  
+					})
                 }
             })
-             
         });
     })
+}
     
-    }
-    
-    
-
-	
-	
-	
-	
-	
 function createFolder(path) {
     fs.mkdir(path, {
         recursive: true
     }, (err) => {});
 }
-	
-	
-	
+
 function copyFiles(assetsPathSRC , folderAssRes) {
-
-fs.readdir(assetsPathSRC ,  (err, data) => {
-
-    data.forEach( file => {
-		
-				let srcFile = path.join(assetsPathSRC , file)
-				let resFile = path.join(folderAssRes , file)
-				
-				fs.stat(srcFile, (err, stats) =>{					
-					if (!stats.isDirectory()){
-							fs.copyFile(srcFile , resFile, (err) => {});
-					} else {
+	fs.readdir(assetsPathSRC ,  (err, data) => {
+    	data.forEach( file => {
+			let srcFile = path.join(assetsPathSRC , file)
+			let resFile = path.join(folderAssRes , file)
+			fs.stat(srcFile, (err, stats) =>{					
+				if (!stats.isDirectory()){
+						fs.copyFile(srcFile , resFile, (err) => {});
+				} else 
+					{
 						createFolder(resFile)
 						copyFiles(srcFile, resFile)
-						}
-				});
-				});
-		})
-
-
-
-
+					}
+			});
+		});
+	})
 }
 
 
