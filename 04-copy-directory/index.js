@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 function copyDir() {
+	
 let  folder = path.join(__dirname , '/files-copy')
 let  folderSrc = path.join(__dirname , '/files')
 
@@ -12,6 +13,17 @@ fs.stat(folder, function(err) {
 		})
     } 
 });
+
+fs.readdir(folder ,  (err, data) => {
+
+    data.forEach( file => {
+					let fileDel = path.join(folder , file) 
+					fs.unlink (fileDel,  err => {})
+				});
+		})
+		
+		
+
 
 fs.readdir(folderSrc ,  (err, data) => {
 
