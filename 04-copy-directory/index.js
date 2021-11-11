@@ -3,8 +3,11 @@ const path = require('path')
 
 function copyDir() {
 	
+
 let  folder = path.join(__dirname , '/files-copy')
 let  folderSrc = path.join(__dirname , '/files')
+
+fs.mkdir(folder, (err) => {})
 
 fs.stat(folder, function(err) {
     if (err) {
