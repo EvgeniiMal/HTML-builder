@@ -2,11 +2,11 @@ const path = require('node:path');
 const fs = require('fs');
 const { mkdir } = require('node:fs');
 const { stdin,stdout } = process;
-let targetPath = path.join(__dirname);
+let targetPath = path.join(__dirname,'files-copy');
 let filePath = path.join(__dirname, 'files');
 
 
- async function copyfiles(){
+async function copyfiles(targetPath,filePath){
 mkdir(targetPath, { recursive: true }, (err,dir) => { if (err) console.log('error')});
 fs.readdir(filePath,{withFileTypes:true},(err,files)=>{
     if (err)
@@ -22,14 +22,13 @@ fs.readdir(filePath,{withFileTypes:true},(err,files)=>{
             console.log('Файл успешно скопирован');
         });}
         else{
-            filePath=path.join(filePath,fileName);
-            
-            await copyfiles();
+          return copyfiles(path.join(targetPath,file.name),path.join(filePath,file.name));
 
-        }
+      }
   
 
     })
   }
 });
 }
+copyfiles(targetPath,filePath);
