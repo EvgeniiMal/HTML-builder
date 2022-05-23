@@ -14,22 +14,14 @@ let rl = readline.createInterface({
 rl.prompt();
 rl.on('line', (input) => {
   if(input == 'exit'){	
-    
     rl.close();
-    console.log("Bye-bye");
   } else {
     fs.appendFile('./02-write-file/text.txt', `${input} `, function(error){if(error) throw error;});
-    const rs = fs.ReadStream('./02-write-file/text.txt', 'utf8');
-    let data = '';
-    rs.on('data', chunk => data += chunk);
-    rs.on('end', () => {
-                        console.log(data); 
-                        rl.prompt()});
   }
-rl.on("SIGINT", () => {
-    
-    rl.setPrompt("Bye-bye");
-    rl.prompt();
+});  
+rl.on("SIGINT", () =>  rl.close());
+
+rl.on('close', () => {
+    console.log("Bye-bye"); 
     rl.close();
-    });
 });
