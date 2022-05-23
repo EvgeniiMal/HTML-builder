@@ -1,8 +1,14 @@
-var fs = require('fs');
+const fs = require('fs');
+const path = require('path');
+const { stdin, stdout } = process;
+var output = fs.createWriteStream(path.join(__dirname, "text.txt"));
 
-function create() {
+stdout.write('write message\n')
 
-}
+stdin.on('data', (data) => {
+    if (process.on('SIGINT', () => process.exit()));
+    if(data.toString() === 'exit\r\n') process.exit();
+    output.write(data);
+});
 
-console.log('Hello, please write the message');
-create();
+process.on('exit', (item) => itemm === 0 ? stdout.write('Good bye!') : stdout.write('error' + item));
