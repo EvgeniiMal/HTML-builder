@@ -8,6 +8,14 @@ fs.mkdir(pathToCopyFiles, {recursive: true},err => {
   if (err) throw err;
 });
 
+fs.readdir(pathToCopyFiles, (err, data) => {
+  if (err) throw err;
+  data.map(elem => {
+    fs.unlink(path.join(pathToCopyFiles, elem), err => {
+      if (err) throw err;
+    });
+  });
+});
 
 fs.readdir(pathToFiles, (err, data) => {
   if (err) throw err;
