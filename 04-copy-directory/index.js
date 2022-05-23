@@ -9,6 +9,6 @@ fs.readdir(pathFolder2, (err, files) => {
   files.forEach(file=>
     fs.copyFile(path.join(pathFolder2, file), path.join(pathFolder, file), err => {
       if(err) throw err; 
-      console.log('Файл успешно скопирован');
+      console.log('выполнено');
     }));
 });
