@@ -16,11 +16,11 @@ fs.readdir(sourceFolder, { withFileTypes: true },(err, files) => {
       if (file.isFile()) {
         const ext = path.extname(file.name);
         if (ext.toLowerCase() === '.css') {
-          const stream = new fs.ReadStream(path.join(sourceFolder,file.name));
+          const stream = new fs.ReadStream(path.join(sourceFolder,file.name), {encoding: 'utf-8'});
           stream.on('readable', function(){
             const data = stream.read(); 
             if(data != null) {
-              fs.appendFile(targetFile, data.toString() + '\n', function(error){
+              fs.appendFile(targetFile, data + '\n', function(error){
                 if(error) throw error;});
             }
           });
