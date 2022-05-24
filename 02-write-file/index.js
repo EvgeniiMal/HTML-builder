@@ -15,7 +15,7 @@ console.log('Enter file');
 
 rl.on('line', (input) => {
   const string = input;
-  if (string == '**exit**')
+  if (string == 'exit')
   {
     rl.close();
   }
@@ -25,6 +25,6 @@ rl.on('line', (input) => {
   }
 });
 
-process.on('exit', (code) => {
-  console.log(`About to exit with code: ${code}`);
+process.on('exit', () => {
+  console.log('This is the end. Buy!');
 });
