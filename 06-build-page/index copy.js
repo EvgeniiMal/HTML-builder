@@ -1,6 +1,4 @@
-/* eslint-disable no-empty */
 const fs = require('fs');
-const fsP = require('fs').promises;
 const path = require('node:path');
 
 
@@ -61,89 +59,43 @@ fs.readdir(stylesFolder, { withFileTypes: true },(err, files) => {
           });
         }  } });}});
 
-let htmlData = [];
-let resultData = [];
- 
-async function loadTemplate() {
-  try{
-    const data = await fsP.readFile(templateFile,{encoding: 'utf-8'});
-    htmlData = data.split('\n');
-  }
-  catch(err)
-  {
-    console.log(err);
-  }
-}
+fs.writeFile(targetHtml, '', function(error){
+  if(error) throw error;});
 
-async function loadComponent(filePath) {
-  try{
-    const data = await fsP.readFile(filePath,{encoding: 'utf-8'});
-    resultData.push(data);
-  }
-  catch(err)
+const templateStream = new fs.ReadStream(templateFile, {encoding: 'utf-8'});
+templateStream.on('readable', function(){
+  const templateFileContent = templateStream.read();
+  if ( templateFileContent!=null )
   {
-    console.log(err);
+    const fileArray =  templateFileContent.split('\n');
+    fileArray.forEach(data =>{
+      if(data != null) {
+        const res = data.search(/\{\{(.*)\}\}/i);
+        let name = RegExp.$1;
+        if (res!=-1 && name)
+        { 
+          const fileToHtml = path.join(componentsFolder,name + '.html'); 
+          fs.access(fileToHtml, fs.F_OK, (err) => {
+            if (err) {
+              console.error(err);
+            }
+            else
+            {
+              const stream = new fs.ReadStream(fileToHtml, {encoding: 'utf-8'});
+              stream.on('readable', function(){
+                var fileContent = stream.read();
+                if(fileContent != null) fs.appendFile(targetHtml, fileContent+'\n', function(error){
+                  if(error) throw error;});
+              } 
+              );
+            }    
+          });
+        }
+        else { 
+          fs.appendFile(targetHtml, data, function(error){
+            if(error) throw error;});
+        } 
+      }
+    });
   }
-}
-
-async function testAndPush(htmlString)
-{
-  try{
-    const res = htmlString.search(/\{\{(.*)\}\}/i);
-    let name = RegExp.$1;
-    let data = htmlString;
-    if (res!=-1 && name)
-    { 
-      await loadComponent(path.join(componentsFolder,name + '.html'));
-    }
-    else
-    {
-      resultData.push(data);
-    }
-  }
-  catch(err)
-  {
-    console.log(err);
-  } 
-}
-
-async function collectData(htmlData)
-{
-  try{
-    for (const htmlString of htmlData) {
-      await testAndPush(htmlString);
-    }
-    
-  }
-  catch(err)
-  {
-    console.log(err);
-  }
-}
-
-async function checkTemplate()
-{
-  try{
-    await loadTemplate();
-    await collectData(htmlData);
-  }
-  catch(err)
-  {
-    console.log(err);
-  }
-}
-
-async function writeAndRead()
-{
-  try{
-    await checkTemplate();
-    console.log('Created!');
-    await fsP.writeFile(targetHtml, resultData.join('\n'));
-  }
-  catch(err)
-  {
-    console.log(err);
-  } 
-}
-
-writeAndRead();
+});
