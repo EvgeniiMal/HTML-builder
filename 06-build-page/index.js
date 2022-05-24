@@ -15,27 +15,23 @@ fs.mkdir(targetFolder, { recursive: true }, (err) => {
   if (err) throw err;
 });
 
-function copyDir ( oldDir, newDir )
+async function copyDir ( oldDir, newDir )
 {
-  fs.mkdir(newDir, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
-  fs.readdir(oldDir, { withFileTypes: true },(err, files) => {
-    if (err) console.log(err);
-    else {
-      files.forEach(file => {  
-        if (file.isFile())
-        {   
-          fs.copyFile (path.join(oldDir,file.name),path.join(newDir,file.name),(err) =>
-          {
-            if (err) console.log(err);    
-          });  
-        }
-        else if (file.isDirectory())
-        {
-          copyDir ( path.join(oldDir,file.name), path.join(newDir,file.name) );
-        }
-      });}}); 
+  await fsP.rmdir(newDir, { recursive: true });
+  await fsP.mkdir(newDir, { recursive: true });
+  const files = await fsP.readdir(oldDir, { withFileTypes: true });
+  for(const file of files) 
+  {  
+    if (file.isFile())
+    {   
+      await fsP.copyFile (path.join(oldDir,file.name),path.join(newDir,file.name));  
+    }
+    else if (file.isDirectory())
+    {
+      await copyDir ( path.join(oldDir,file.name), path.join(newDir,file.name) );
+
+    }
+  } 
 }
 
 copyDir ( assetsFolder, path.join(targetFolder, 'assets') );
