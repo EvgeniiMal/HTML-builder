@@ -1,4 +1,3 @@
-/* eslint-disable no-empty */
 const fs = require('fs');
 const fsP = require('fs').promises;
 const path = require('node:path');
