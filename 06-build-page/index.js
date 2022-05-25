@@ -73,21 +73,22 @@ function createHtml(){
             files.forEach(component => components.push(component));     
         })
     rsTemplateHtml.on('data', chunk => data += chunk);
-    rsTemplateHtml.on('end', ()=> replaceSections(data), function(error){if(error) throw error;});  
+    rsTemplateHtml.on('end', () => replaceSections(data), function(error){if(error) throw error;});  
 
         function replaceSections(data){
+            let newData = ''
             for (let component in components){
                 let componentName = components[component];
                 let rs = fs.createReadStream(`./06-build-page/components/${componentName}`);
                 let content = '';
                 let componentsNameSearch = `{{${componentName.substring(0,componentName.indexOf('.'))}}}`;
                 rs.on('data', chunk => content += chunk);
-                rs.on('end', ()=> {
-                    let newData = data.replace(componentsNameSearch, content);   
+                rs.on('end', () => {
+                   // console.log(componentsNameSearch,content)
+                    newData = data.replace(componentsNameSearch, content);   
                     data = newData;
                     fs.writeFile('./06-build-page/project-dist/index.html', newData, function(error){if(error) throw error;});
-                }, function(error){if(error) throw error;});  
-            }
-     //       fs.writeFile('./06-build-page/project-dist/index.html', data, function(error){if(error) throw error;});
+                }, function(error){if(error) throw error});  
+            }        
         }     
     }
