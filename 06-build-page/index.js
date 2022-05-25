@@ -17,7 +17,7 @@ fs.mkdir(targetFolder, { recursive: true }, (err) => {
 
 async function copyDir ( oldDir, newDir )
 {
-  await fsP.rmdir(newDir, { recursive: true });
+  await fsP.rm(newDir, { recursive: true, force:true });
   await fsP.mkdir(newDir, { recursive: true });
   const files = await fsP.readdir(oldDir, { withFileTypes: true });
   for(const file of files) 
