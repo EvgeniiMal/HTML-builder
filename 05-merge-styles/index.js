@@ -1,53 +1,32 @@
-// const fs = require('fs');
-// const path = require('path');
-// const pathFolder = path.join(__dirname, 'project-dist');
-// const pathFolder2 = path.join(pathFolder, 'bundle.css');
-// const pathFolder3 = path.join(__dirname, 'styles');
-// fs.readdir(pathFolder3, (err, files) => {
-//   if(err) throw err;
-//   files.map(file=>
-//     fs.stat(path.join(pathFolder3, file), (err, stats) => {
-//       if (err) {
-//         console.error(err);
-//         return;
-//       }
-//       if(stats.isFile()===true &&  path.extname(file)==='.css'){
-//           console.log(file);
-//         fs.readFile(path.join(pathFolder3, file),'utf8', function(error, fileContent){ 
-//           if(error) throw error; // ошибка чтения файла, если есть
-//           let toWrite=fileContent;
-//           console.log(toWrite);
-//           fs.createWriteStream(pathFolder2).write(toWrite);
-//         });
-//       }
-//     })
-//   );
-// });
-
-
-
 const fs = require('fs');
 const path = require('path');
-const { readdir } = require('fs/promises');
-const pathfolder2 = path.join(__dirname, 'project-dist');
-const pathfolder1 = path.join(__dirname, 'styles');
 
-async function addFile(pathfolder1, pathfolder2) {
+const stylesFolderPath = path.join(__dirname, 'styles');
+const resultFilePath = path.join(__dirname, 'project-dist', 'bundle.css');
+
+async function createBundle() {
   try {
-    const pathfolder3 = fs.createWriteStream(path.join(pathfolder2, 'bundle.css'));
-    const pathfolder1_1 = await readdir(pathfolder1, {withFileTypes: true});
-    console.log(pathfolder1_1);
-    for (let style of pathfolder1_1) {
-      if (style.isFile() && style.name.includes('.css')) {
-        const stylefile = fs.createReadStream(path.join(pathfolder1, style.name), 'utf-8');
-        stylefile.pipe(pathfolder3);
+    await fs.promises.writeFile(resultFilePath, '');
+    const files = await fs.promises.readdir(stylesFolderPath, {
+      withFileTypes: true,
+    });
+    for (const file of files) {
+      const filePath = path.join(stylesFolderPath, file.name);
+      const filePathObj = path.parse(filePath);
+      if (file.isFile() && filePathObj.ext === '.css') {
+        let data = '';
+        const readableStream = fs.createReadStream(filePath, 'utf-8');
+        readableStream.on('data', (chunk) => (data += chunk));
+        readableStream.on('end', () => {
+          fs.promises.appendFile(resultFilePath, data + '\n');
+        });
       }
     }
+
+    console.log('bundle.css succesfully created!');
   } catch (err) {
-    console.log(err.message);
+    console.error(err);
   }
 }
 
-addFile(pathfolder1, pathfolder2);
-
-
+createBundle();
