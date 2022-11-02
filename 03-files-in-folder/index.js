@@ -1,7 +1,7 @@
-var path = require('path');
-var fs = require('fs');
+const path = require('path');
+const fs = require('fs');
 //var async = require('async');
-let dir='./03-files-in-folder/secret-folder/';
+const  dir='./03-files-in-folder/secret-folder/';
 function directoryInn(put){
     let fileSize;
 fs.readdir(put,{withFileTypes: true},function(err, items) {   
