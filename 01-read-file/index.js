@@ -1,21 +1,19 @@
-const { stdout, exit } = process;
+const { stdout, stderr, exit } = process;
 const path = require("node:path");
-const fs = require("node:fs/promises");
-const dirname="./01-read-file";
-const textFilePath =path.resolve( path.join(dirname, "text.txt"));
-console.log(textFilePath);
+const fs = require("node:fs");
+const dirname = "./01-read-file";
+const textFilePath = path.resolve(path.join(dirname, "text.txt"));
 
-async function readText(path) {
-  let filehandle;
-  try {
-    filehandle = await fs.open(path, "r");
-    const data = await fs.readFile(path, { encoding: "utf8" });
+function readText(path) {
+  let stream = fs.createReadStream(path, "utf8");
+  stream.on("error", function (error) {
+    stderr.write(error.message);
+    exit();
+  });
+
+  stream.on("data", (data) => {
     stdout.write(data);
     exit();
-  } catch (err) {
-    console.log(err);
-  } finally {
-    if (filehandle) await filehandle.close();
-  }
+  });
 }
 readText(textFilePath);
