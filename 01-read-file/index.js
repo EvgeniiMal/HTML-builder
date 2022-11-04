@@ -1,8 +1,7 @@
 const { stdout, stderr, exit } = process;
 const path = require("node:path");
 const fs = require("node:fs");
-const dirname = "./01-read-file";
-const textFilePath = path.resolve(path.join(dirname, "text.txt"));
+const textFilePath = path.resolve(path.join(__dirname, "text.txt"));
 
 function readText(path) {
   let stream = fs.createReadStream(path, "utf8");
