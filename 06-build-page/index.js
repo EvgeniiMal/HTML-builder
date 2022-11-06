@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { Readable } = require("stream");
 const fsPromises = fs.promises;
 const dirDest = "./06-build-page/project-dist/";
 const dirDestAssets = "./06-build-page/project-dist/assets/";
@@ -11,11 +12,10 @@ const dirSrcStyle = "./06-build-page/styles/";
 const destIndex = "./06-build-page/project-dist/index.html";
 const srcIndex = "./06-build-page/template.html"
 const dirSrcComp = "./06-build-page/components/";
-
+let abajur=0;
 // ================= make a folders project-dist and copy assets ============================
 
 fsPromises.mkdir(dirDest,{recursive: true},(err) => {if (err) {console.log(err)};});
-//fsPromises.copyFile("./06-build-page/template.html",dirDest+"index.html");
 fsPromises.mkdir(dirDestAssets,{recursive: true},(err) => {if (err) {console.log(err)};});
 
 fs.readdir(dirSrcAssets,{withFileTypes: true},function(err, items) {   
@@ -30,7 +30,7 @@ fs.readdir(dirSrcAssets,{withFileTypes: true},function(err, items) {
         });
     
     }
-     // fsPromises.copyFile(dirSrcAssets+items[i].name,dirDestAssets+items[i].name);
+     
     };
   });
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -57,51 +57,41 @@ fs.readdir(dirSrcAssets,{withFileTypes: true},function(err, items) {
 
 let assArr='';
 const stream = fs.createReadStream(srcIndex,{encoding: 'utf-8'});
-//const outputHtml = fs.createWriteStream(destIndex);
 stream.on('readable', function(){
     let data = stream.read();
     if(data!=null){assArr=data};
-    if(data != null){outputHtml.write(data)};
-});
-stream.on('end',() =>{console.log('template ===>>> index ')});
-let filCont;
-fs.readFile(outputHtmlPath, 'utf8', (errorHeader, fileContent) => {
-console.log('== index.html == '+fileContent);
-filCont=fileContent;
-console.log('filCont===================>>'+filCont);
 });
 
-  
-   
- /*   fs.readdir(dirSrcComp,{withFileTypes: true},function(err, items) {   
-        for (let i = 0; i < items.length; i++) {
-            if(items[i].isFile()){ 
-                const stream = fs.createReadStream(dirSrcComp+items[i].name,{encoding: 'utf-8'});
-                const streamIndex = fs.createReadStream(destIndex,{encoding: 'utf-8'});
-                streamIndex.on('readable', function(){
-                    console.log("---------------------------"+destIndex);
-                    let dataIndex=stream.read();
-                    console.log('==========================='+dataIndex);
-                    if(dataIndex != null){concole.log('+++++++++++++++++++++++++++++'+dataIndex) };
-                });
-                stream.on('readable', function(){
-                    let data = stream.read();
-                    if(data!=null){console.log('file name ==>>  '+items[i].name+'  ==>>  ins  '+data)};
-                });
-                 
-                stream.on('end',() =>{});
-              
-                console.log('file  ==>>'+path.parse(items[i].name).name);
-              
-            };  
-
-        }})
-
-
-
-   // let newstr = assArr.replace(/{{header}}/, 'апельсины');*/
-        
+   let arrDest2=[];
+fs.readdir(dirSrcComp,{withFileTypes: true},function(err, items) {   
+    const streamTemplate = fs.createReadStream('./06-build-page/template.html',{encoding: 'utf-8'});
     
- 
+    streamTemplate.on('readable',function(){
+        let dataTemplate=streamTemplate.read();
+   
+         
 
+    for (let i = 0; i < items.length; i++) {
+      fs.stat(dirSrcComp+items[i].name,function(err, bum){
+        if((items[i].isFile())){
+            
+          console.log(dirSrcComp+items[i].name);
+          const stream = fs.createReadStream(dirSrcComp+items[i].name,{encoding: 'utf-8'});
+          stream.on('readable', function(){
+            let data = stream.read();
+            if(data != null){arrDest2[i] = data };
+            let indef = '{{'+path.parse(items[i].name).name+'}}';
+            if((data != null)&&(dataTemplate !=null)) { dataTemplate = dataTemplate.replace(indef,arrDest2[i]);};
 
+            if((i==(items.length-1))&&(dataTemplate !=null)&&(abajur==0)){console.log(i+'******** if i');outputHtml.write(dataTemplate);abajur=1};
+             
+        
+        });
+        
+        
+        };
+      }); 
+    };
+  })
+});
+  
