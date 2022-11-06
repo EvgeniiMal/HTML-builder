@@ -1,7 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const { stdin, stdout } = process;
-const stream = require('stream');
 
 const dirPath = path.resolve(__dirname, 'secret-folder');
 
