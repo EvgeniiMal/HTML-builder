@@ -1,4 +1,11 @@
-let fs = require('fs');
-let fileContent = fs.readFileSync('01-read-file/text.txt', 'utf8');
-console.log(fileContent);
+const fs = require('fs');
+const path = require('path');
 
+fs.readFile(
+   path.join('01-read-file', 'text.txt'),
+   'utf-8',
+   (err, data) => {
+      if (err) throw err;
+      console.log(data);
+   }
+);

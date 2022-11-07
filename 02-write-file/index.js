@@ -1,17 +1,14 @@
 let fs = require('fs');
 
-function createFile() {
-	fs.open('02-write-file/text.txt', 'w', (err) => {
-		if (err) throw err;
-		console.log('file created');
-	});
-}
-
-createFile();
-
-let stream = new fs.ReadStream('02-read-file/text.txt');
-
-stream.on('readable', function() {
-	let data = stream.read();
-	if (data != null) console.log(data.toString());
+fs.open('02-write-file/text.txt', 'r+', (err) => {
+	if (err) throw err;
+	console.log('file created');
 });
+
+let string = 'Hello!'
+
+fs.appendFile('02-write-file/text.txt', `\n` + string, function(error){
+	if(error) throw error;
+	console.log('Данные успешно записаны записать файл');
+});
+
