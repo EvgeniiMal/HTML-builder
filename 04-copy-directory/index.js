@@ -7,7 +7,6 @@ const copiedFolderPath = "04-copy-directory/files-copy";
 async function cleanCopiedFolder(folderPath) {
   for (const file of await fsPr.readdir(folderPath)) {
     await fsPr.unlink(path.join(folderPath, file));
-    console.log(file, " deleted");
   }
 }
 async function copyFolder(initFolderPath, copiedFolderPath) {
@@ -20,7 +19,6 @@ async function copyFolder(initFolderPath, copiedFolderPath) {
     const initFilePath = path.resolve(initFolderPath, file),
       copiedFilePath = path.resolve(copiedFolderPath, file);
     await fsPr.copyFile(initFilePath, copiedFilePath);
-    console.log(file, " copied");
   });
 }
 
