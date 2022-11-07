@@ -11,6 +11,7 @@ function buildHtml(tempFile, compPath, buildHtmlFile) {
   rs.on('error', err => addPart(`не могу прочитать "template.html" файл`, err))
   rs.on('close', () => {
     const tempArr = tempString
+//     разбиваем на массив для разделения{т.е. находим нужное нам, потом перебираем и заменяем
       .split('{')
       .map(data => data == '' ? '{' : data)
       .map(data =>
@@ -34,7 +35,11 @@ function buildHtml(tempFile, compPath, buildHtmlFile) {
               .flat()
               .filter(data => data == '{' || data == '}' ? '' : data)
               .join('')
-            ws.write(toWrite, err => {if(err) console.log(err)})
+            ws.write(toWrite, err => {
+              if(err){
+                console.log(err);
+              }
+              })
           }
         });
       }
