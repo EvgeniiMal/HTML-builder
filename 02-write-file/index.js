@@ -1,14 +1,41 @@
-let fs = require('fs');
+const fs = require('fs');
+const path = require('path');
+const process = require('process');
+const {exit, stdin} = process;
 
-fs.open('02-write-file/text.txt', 'r+', (err) => {
-	if (err) throw err;
-	console.log('file created');
-});
+fs.writeFile(
 
-let string = 'Hello!'
+   path.join('02-write-file', 'text.txt'),
+   '\n',
+   err => {
+      if (err) throw err;
+      console.log('Файл был создан');
+   }
 
-fs.appendFile('02-write-file/text.txt', `\n` + string, function(error){
-	if(error) throw error;
-	console.log('Данные успешно записаны записать файл');
-});
+);
+
+stdin.on('data', data => {
+
+	fs.appendFile(
+		path.join('02-write-file', 'text.txt'),
+		data,
+		err => {
+			if (err) throw err;
+			console.log('Файл был изменен'); 
+		}
+	);
+
+	if (data.toString().trim() === 'exit') {
+		console.log('Откройте файл text.txt');
+		process.exit(); }
+
+	process.on('SIGINT', () => {
+		console.log('Откройте файл text.txt');
+		process.exit();
+	}
+	)
+}
+);
+
+
 
