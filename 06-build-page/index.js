@@ -4,12 +4,18 @@ const { stdout, stderr } = require("process");
 const fs = require("fs");
 
 const dirNameCurrent = path.dirname(__filename);
+
 const dirDist = path.join(dirNameCurrent, "project-dist");
+
 const dirAssets = path.join(dirNameCurrent, "assets");
 const dirAssetsCopy = path.join(dirDist, "assets");
 
 const targetStyle = path.join(dirDist, "style.css");
 const dirStyle = path.join(dirNameCurrent, "styles");
+
+const htmlTemplateFile = path.join(dirNameCurrent, "template.html");
+const dirComponents = path.join(dirNameCurrent, "components");
+const htmlResultFile = path.join(dirDist, "index.html");
 
 buildPage();
 
@@ -20,13 +26,14 @@ async function buildPage() {
   }
   copyDir(dirAssets, dirAssetsCopy);
   mergeStyles();
+  buildHtml();
 }
 
 async function copyDir(soursePath, distPath) {
   try {
     const createDir = await mkdir(distPath, { recursive: true });
     if (createDir) {
-      stdout.write(`${distPath} folder created\n`);
+      stdout.write(`\n${distPath} folder created\n`);
     }
 
     const files = await readdir(soursePath, { withFileTypes: true });
@@ -91,4 +98,42 @@ async function mergeStyles() {
         stdout.write(`${file.name} styles copied to style.css\n`);
       });
     });
+}
+
+async function buildHtml() {
+  const readableStream = fs.createReadStream(htmlTemplateFile, "utf-8");
+  let htmlString = "";
+
+  readableStream.on("data", (chunk) => {
+    htmlString += chunk;
+  });
+  readableStream.on("end", async () => {
+    const files = await readdir(dirComponents, { withFileTypes: true });
+    files
+      .filter(
+        (file) =>
+          file.isFile() &&
+          path.extname(path.join(dirStyle, file.name)) === ".html"
+      )
+      .forEach((file) => {
+        const lastDote = file.name.lastIndexOf(".");
+        const fileName = file.name.slice(0, lastDote);
+        const filePath = path.join(dirComponents, file.name);
+
+        const readableStreamHtml = fs.createReadStream(filePath, "utf-8");
+        let componentString = "";
+
+        readableStreamHtml.on("data", (chunk) => {
+          componentString += chunk;
+        });
+        readableStreamHtml.on("end", () => {
+          htmlString = htmlString.replace(`{{${fileName}}}`, componentString);
+          const output = fs.createWriteStream(htmlResultFile);
+          output.write(htmlString);
+          stdout.write(
+            `${htmlResultFile} updated with ${file.name} component content\n`
+          );
+        });
+      });
+  });
 }
