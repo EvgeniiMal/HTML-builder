@@ -22,10 +22,9 @@ async function remakeDir(nameDir) {
 
 function readFile(nameFile, change) {
 	return new Promise(function (resolve, reject) {
-		let output = "";
-		const stream = fs.createReadStream(path.resolve(__dirname, nameFile));
-		stream.on('data', function (part) { output += part; }); // (typeof change == "function") ? change(part) : 
-		stream.on('end', () => resolve(output));
+		fs.readFile(path.resolve(__dirname, nameFile), function (err, data) {
+			resolve(data);
+		})
 	});
 }
 
@@ -41,10 +40,11 @@ async function buildHTMLBundle(template, componentsFolder, distName, distFile) {
 	const tempFileString = await readFile(path.resolve(__dirname, template));
 	const tempFileBundle = tempFileString.toString().replace(/\}{2}\r\n/gm, ".html}}").replace(/[\{,\}]{1,}/gm, "|").split("|")
 
-	for (let i = 0; i < tempFileBundle.length; i++) {
-		if (tempFileBundle[i].lastIndexOf(".html") != -1) tempFileBundle[i] = await readFile(path.join(componentsFolder, tempFileBundle[i]));
-
-		bundleStream.write(tempFileBundle[i]);
+	for (let part of tempFileBundle) {
+		if (part.lastIndexOf(".html") != -1) {
+			bundleStream.write(await readFile(path.join(componentsFolder, part)));
+		}
+		else bundleStream.write(part);
 	}
 }
 
@@ -80,10 +80,6 @@ async function copyDir(srcDir, destDir) {
 	}
 
 }
-
-
-
-
 
 remakeDir(nameDistDir).then(() => {
 	buildCSSBundle(srcCSSDir, nameDistDir, distCSSFile);
