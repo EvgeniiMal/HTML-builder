@@ -4,9 +4,9 @@ function buildHtml(tempFile, compPath, buildHtmlFile) {
   const path = require('path');
   const fs = require('fs');
   const rs = fs.createReadStream(tempFile, {encoding: 'utf-8'});
-  let tempString = '';
   let countMods = 0;
-
+  let tempString = '';
+  
   rs.on('data', data => tempString += data)
   rs.on('error', err => addPart(`не могу прочитать "template.html" файл`, err))
   rs.on('close', () => {
@@ -24,7 +24,7 @@ function buildHtml(tempFile, compPath, buildHtmlFile) {
         const compFilePath = path.join(compPath, compFile + '.html');
         const rsComp = fs.createReadStream(compFilePath, {encoding: 'utf-8'});
         rsComp.on('data', data => cData += data);
-        rsComp.on('error', err => {cData = addPart(`Can't read component file "${compFile}.html"`, err)});
+        rsComp.on('error', err => {cData = addPart(`Не удается прочитать файл компонента "${compFile}.html"`, err)});
         rsComp.on('close', () => {
           arr[i] = cData;
           countMods--;
