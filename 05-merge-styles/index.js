@@ -20,3 +20,4 @@ fs.readdir(dirSrc,{withFileTypes: true},function(err, items) {
     }); 
   };
 });
+

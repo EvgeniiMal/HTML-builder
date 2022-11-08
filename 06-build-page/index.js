@@ -41,11 +41,11 @@ fs.readdir(dirSrcAssets,{withFileTypes: true},function(err, items) {
     for (let i = 0; i < items.length; i++) {
       fs.stat(dirSrcStyle+items[i].name,function(err, bum){
         if((items[i].isFile())&&(path.extname(dirSrcStyle+items[i].name).toString())===".css"){
-          console.log(dirSrcStyle+items[i].name);
+          
           const stream = fs.createReadStream(dirSrcStyle+items[i].name,{encoding: 'utf-8'});
           stream.on('readable', function(){
             let data = stream.read();
-            if(data != null){arrDest[i] = data;  output.write(arrDest[i]); console.log(items[i].name+'   aded')};
+            if(data != null){arrDest[i] = data;  output.write(arrDest[i]);};
           });
           stream.on('end',() => {});
         };
@@ -75,7 +75,7 @@ fs.readdir(dirSrcComp,{withFileTypes: true},function(err, items) {
       fs.stat(dirSrcComp+items[i].name,function(err, bum){
         if((items[i].isFile())){
             
-          console.log(dirSrcComp+items[i].name);
+        
           const stream = fs.createReadStream(dirSrcComp+items[i].name,{encoding: 'utf-8'});
           stream.on('readable', function(){
             let data = stream.read();
@@ -83,7 +83,7 @@ fs.readdir(dirSrcComp,{withFileTypes: true},function(err, items) {
             let indef = '{{'+path.parse(items[i].name).name+'}}';
             if((data != null)&&(dataTemplate !=null)) { dataTemplate = dataTemplate.replace(indef,arrDest2[i]);};
 
-            if((i==(items.length-1))&&(dataTemplate !=null)&&(abajur==0)){console.log(i+'******** if i');outputHtml.write(dataTemplate);abajur=1};
+            if((i==(items.length-1))&&(dataTemplate !=null)&&(abajur==0)){outputHtml.write(dataTemplate);abajur=1};
              
         
         });
