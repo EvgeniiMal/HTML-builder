@@ -11,7 +11,7 @@ fs.readdir(dirPath, { withFileTypes: true }, (err, dirEntries) => {
   else {
     dirEntries.forEach((dirEntry) => {
       let ext = path.extname(
-        "D:\\school\\HTML-builder\\HTML-builder\\03-files-in-folder\\secret-folder\\" +
+        "D:\\school\\HTML-builder\\HTML-builder\\05-merge-styles\\project-dist\\" +
           dirEntry.name
       );
       if (ext === ".css") {
@@ -20,7 +20,6 @@ fs.readdir(dirPath, { withFileTypes: true }, (err, dirEntries) => {
             dirEntry.name
         );
         stream.on("data", (e) => {
-          console.log(e.toString());
           fs.appendFile(dirPathNew, e.toString(), function (err) {
             if (err) throw err;
             console.log("Файл создан!");

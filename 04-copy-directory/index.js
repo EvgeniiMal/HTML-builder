@@ -11,7 +11,7 @@ fs.mkdir(dirPathNew, { recursive: true }, function (err) {
   fs.readdir(
     "D:\\school\\HTML-builder\\HTML-builder\\04-copy-directory\\files\\",
     "utf8",
-    function (error, data) {
+    function (err, data) {
       for (const key in data) {
         fs.copyFile(
           "D:\\school\\HTML-builder\\HTML-builder\\04-copy-directory\\files\\" +
