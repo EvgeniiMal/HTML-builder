@@ -5,7 +5,7 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-const pathToFile = path.dirname(__filename) + '\\text.txt';
+const pathToFile = path.join(__dirname, 'text.txt');
 
 const question = `What do you think about? Press "enter" and input what do you think'.
 After end of the string press Enter. To finish type 'exit' and press "enter"`;
