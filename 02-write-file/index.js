@@ -14,7 +14,6 @@ fs.appendFile(pathTXT, "", function (err) {
     fs.appendFile(pathTXT, chunk, function (err) {
       if (err) throw err;
     });
-
     console.log("Got chunk: " + chunk);
     process.on("SIGINT", function () {
       console.log("Благодарю, что сделали проверку этого задания!");
