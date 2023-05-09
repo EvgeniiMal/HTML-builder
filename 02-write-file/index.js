@@ -1,9 +1,6 @@
 const fs = require("fs");
 const path = require("node:path");
-
-let pathTXT = path.join(
-  "D:\\school\\HTML-builder\\HTML-builder\\02-write-file\\text.txt"
-);
+let pathTXT = path.join(__dirname, "text.txt");
 
 fs.appendFile(pathTXT, "", function (err) {
   if (err) throw err;
