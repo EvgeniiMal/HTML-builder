@@ -1,24 +1,51 @@
 const fs = require("fs");
 const path = require("node:path");
 
-let dirPath = path.join(__dirname, "styles");
-let dirPathNew = path.join(__dirname, "bundle.css");
-let dirProjectDist = path.join(__dirname, "project-dist");
+const source = path.join(__dirname, 'styles');
+const bundle = path.join(__dirname, 'project-dist', 'bundle.css');
 
-fs.readdir(dirPath, { withFileTypes: true }, (err, dirEntries) => {
-  if (err) console.log(err);
-  else {
-    dirEntries.forEach((dirEntry) => {
-      let ext = path.extname(dirProjectDist + "\\" + dirEntry.name);
-      if (ext === ".css") {
-        let stream = new fs.ReadStream(dirPath + "\\" + dirEntry.name);
-        stream.on("data", (e) => {
-          fs.appendFile(dirPathNew, e.toString(), function (err) {
-            if (err) throw err;
-            console.log("Файл создан!");
-          });
-        });
+function copyFiles(src, dist) {
+  fs.readdir(src, (error, files) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    fs.writeFile(dist, '', (error) => {
+      if (error) {
+        console.error(error);
+        return;
       }
     });
-  }
-});
+
+    files.forEach((file) => {
+      const fullPath = path.join(src, file);
+
+      fs.stat(fullPath, (error, stats) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        if (stats.isFile() && path.extname(fullPath) === '.css') {
+          appendFile(fullPath, dist);
+        }
+      });
+    });
+  });
+}
+
+function appendFile(src, dist) {
+  const stream = fs.createReadStream(src, 'utf8');
+
+  stream.on('data', (chunk) => {
+    fs.appendFile(dist, chunk, (error) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+    });
+  });
+}
+
+copyFiles(source, bundle);

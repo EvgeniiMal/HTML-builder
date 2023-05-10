@@ -3,22 +3,35 @@ const path = require("node:path");
 
 let dirPath = path.join(__dirname, "secret-folder");
 
-fs.readdir(dirPath, { withFileTypes: true }, (err, dirEntries) => {
-  if (err) console.log(err);
-  else {
-    dirEntries.forEach((dirEntry) => {
-      fs.stat(dirPath + "\\" + dirEntry.name, (error, stats) => {
+function readDirectory(src) {
+  fs.readdir(src, (error, files) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    files.forEach((file) => {
+      let dirPath = path.join(src, file);
+
+      fs.stat(dirPath, (error, stats) => {
         if (error) {
-          console.log(error);
-        } else {
-          let size = stats.size + "kb";
-          let name = dirEntry.name.split(".", 1).toString();
-          let ext = path
-            .extname(dirPath + "\\" + dirEntry.name)
-            .replace(".", "");
-          console.log(name + " - " + ext + " - " + size);
+          console.error(error);
+          return;
+        }
+
+        if (stats.isFile()) {
+          const fileFormat = path.extname(dirPath);
+          const fileName = path.basename(dirPath, fileFormat);
+          const fileSize = stats.size;
+          const outputLine = `${fileName} - ${fileFormat.slice(
+            1
+          )} - ${fileSize}b`;
+
+          console.log(outputLine);
         }
       });
     });
-  }
-});
+  });
+}
+
+readDirectory(dirPath);
